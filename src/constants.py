@@ -1,3 +1,5 @@
+import re
+
 # APP IDs
 DASHEN_APP_ID = "com.dashen.dashensuperapp"
 CBE_APP_ID = "com.combanketh.mobilebanking"
@@ -18,3 +20,7 @@ KEY_MAPPING = {
     "score": "rating",
     "at": "date",
 }
+
+
+# Regex for any Ethiopic script character (Amharic)
+ethiopic_pattern = re.compile(r"[\u1200-\u137F]")

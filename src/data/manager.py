@@ -2,6 +2,7 @@ from pathlib import Path
 import pandas as pd
 from src.constants import BOA_APP_ID, CBE_APP_ID, DASHEN_APP_ID, BOA, CBE, DASHEN
 from scripts import data_scrapper, reviews_parser
+from src.preprocessing import DataCleaner
 
 
 class DataManager:
@@ -19,31 +20,30 @@ class DataManager:
                 raw_reviews[bank] = scrapped
 
             df = reviews_parser(raw_reviews)
-            self.save_to_csv(df)
+            cleaner = DataCleaner(df)
+            cleaner.clean_df()
+            cleaned_df = cleaner.get_df()
+            self.save_to_csv(cleaned_df)
+            return cleaned_df
         except Exception as e:
             print(f"Something went wrong while scraping data: {e}")
 
     def load_data(self) -> pd.DataFrame:
-        try:
-            path = self.data_dir / self.reviews_data_file_name
-            data = pd.read_csv(path, parse_dates=["date"], dtype={"rating": "Int64"})
-            return data
-        except Exception as e:
-            print(f"Something went wrong while loading data: {e}")
+        path = self.data_dir / self.reviews_data_file_name
+        if not path.exists():
+            raise FileNotFoundError(f"CSV file not found: {path}")
+
+        return pd.read_csv(path, parse_dates=["date"], dtype={"rating": "Int64"})
 
     def save_to_csv(
         self, df: pd.DataFrame, keep_index: bool = False, file_name: str = ""
     ):
-        try:
-            if df.empty:
-                print(
-                    "Please make sure your data is not empty and have passed the correct file name"
-                )
-            if not file_name:
-                file_name = self.reviews_data_file_name
+        if df.empty:
+            raise ValueError("Cannot save empty DataFrame.")
 
-            path = self.data_dir / file_name
-            df.to_csv(path, index=keep_index)
-            print(f"Successfully saved to file {file_name}")
-        except Exception as e:
-            print(f"Unable to save data to csv. Please try again. : {e}")
+        if not file_name:
+            file_name = self.reviews_data_file_name
+
+        path = self.data_dir / file_name
+        df.to_csv(path, index=keep_index)
+        print(f"Saved cleaned data to {path}")
