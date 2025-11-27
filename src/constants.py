@@ -21,6 +21,9 @@ KEY_MAPPING = {
     "at": "date",
 }
 
+# Data Source
+GOOGLE_PLAY = "google_play"
+
 
 # Regex for any Ethiopic script character (Amharic)
 ethiopic_pattern = re.compile(r"[\u1200-\u137F]")
