@@ -49,7 +49,7 @@ class DataCleaner:
         self.df[self.clean_review_col_key] = self.df[self.review_col_key].map(
             clean_text
         )
-        print(f"Saved cleaned review under {self.clean_review_col_key}")
+        print(f"Saved cleaned review under {self.clean_review_col_key} column")
 
         return True
 

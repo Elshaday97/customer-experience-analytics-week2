@@ -41,7 +41,7 @@ class DataManager:
             print(f"Something went wrong while scraping data: {e}")
 
     def load_data(self) -> pd.DataFrame:
-        path = self.data_dir / self.reviews_data_file_name
+        path = self.processed_data_dir / self.cleaned_reviews_data_file_name
         if not path.exists():
             raise FileNotFoundError(f"CSV file not found: {path}")
 

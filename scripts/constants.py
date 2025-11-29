@@ -37,7 +37,38 @@ SCRAPPER_CONFIG = {
 
 MAX_SCRAPPER_RETRIES = 3
 
-NEGATION_WORDS = {"not", "no", "never", "n't", "dont", "don't"}
+NEGATION_WORDS = {
+    "not",
+    "no",
+    "never",
+    "n't",
+    "dont",
+    "don't",
+    "doesn't",
+    "doesnot",
+    "won't",
+}
+
+CONTRACTIONS = {
+    "don't": "do not",
+    "doesn't": "does not",
+    "didn't": "did not",
+    "can't": "can not",
+    "won't": "will not",
+    "isn't": "is not",
+    "aren't": "are not",
+    "wasn't": "was not",
+    "weren't": "were not",
+    "shouldn't": "should not",
+    "couldn't": "could not",
+    "wouldn't": "would not",
+    "haven't": "have not",
+    "hasn't": "has not",
+    "hadn't": "had not",
+}
+
+
+CUSTOM_PROJECT_STOPWORDS = {"app", "apps", "update", "updated", "new", "better"}
 
 RAW_DATA_DIR_FOR_NOTEBOOKS = "../data/raw"
 PROCESSED_DATA_DIR_FOR_NOTEBOOKS = "../data/processed"
