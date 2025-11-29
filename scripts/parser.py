@@ -1,6 +1,6 @@
 from typing import Dict, List
 import pandas as pd
-from src.constants import KEY_MAPPING, GOOGLE_PLAY
+from scripts.constants import KEY_MAPPING, GOOGLE_PLAY
 
 
 def reviews_parser(raw_reviews_dict: Dict[str, List[Dict]]) -> pd.DataFrame:

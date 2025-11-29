@@ -1,16 +1,27 @@
 from pathlib import Path
 import pandas as pd
-from src.constants import BOA_APP_ID, CBE_APP_ID, DASHEN_APP_ID, BOA, CBE, DASHEN
+from scripts.constants import (
+    BOA_APP_ID,
+    CBE_APP_ID,
+    DASHEN_APP_ID,
+    BOA,
+    CBE,
+    DASHEN,
+    RAW_DATA_DIR_FOR_NOTEBOOKS,
+    PROCESSED_DATA_DIR_FOR_NOTEBOOKS,
+)
 from scripts import data_scrapper, reviews_parser
 from src.preprocessing import DataCleaner
 
 
 class DataManager:
 
-    def __init__(self, data_dir="../data"):
+    def __init__(self):
         self.bank_app_ids = {DASHEN: DASHEN_APP_ID, CBE: CBE_APP_ID, BOA: BOA_APP_ID}
-        self.data_dir = Path(data_dir)
+        self.raw_data_dir = Path(RAW_DATA_DIR_FOR_NOTEBOOKS)
+        self.processed_data_dir = Path(PROCESSED_DATA_DIR_FOR_NOTEBOOKS)
         self.reviews_data_file_name = "reviews_data.csv"
+        self.cleaned_reviews_data_file_name = "cleaned_reviews_data.csv"
 
     def scrape_reviews(self) -> pd.DataFrame:
         try:
@@ -20,30 +31,43 @@ class DataManager:
                 raw_reviews[bank] = scrapped
 
             df = reviews_parser(raw_reviews)
+            self.save_to_csv(df)
             cleaner = DataCleaner(df)
             cleaner.clean_df()
             cleaned_df = cleaner.get_df()
-            self.save_to_csv(cleaned_df)
-            return cleaned_df
+            self.save_to_csv(cleaned_df, processed=True)
+            return pd.DataFrame()
         except Exception as e:
             print(f"Something went wrong while scraping data: {e}")
 
     def load_data(self) -> pd.DataFrame:
-        path = self.data_dir / self.reviews_data_file_name
+        path = self.processed_data_dir / self.cleaned_reviews_data_file_name
         if not path.exists():
             raise FileNotFoundError(f"CSV file not found: {path}")
 
         return pd.read_csv(path, parse_dates=["date"], dtype={"rating": "Int64"})
 
     def save_to_csv(
-        self, df: pd.DataFrame, keep_index: bool = False, file_name: str = ""
+        self,
+        df: pd.DataFrame,
+        keep_index: bool = False,
+        file_name: str = "",
+        processed: bool = False,
     ):
         if df.empty:
             raise ValueError("Cannot save empty DataFrame.")
 
         if not file_name:
-            file_name = self.reviews_data_file_name
+            file_name = (
+                self.cleaned_reviews_data_file_name
+                if processed
+                else self.reviews_data_file_name
+            )
 
-        path = self.data_dir / file_name
+        path = (
+            (self.processed_data_dir / file_name)
+            if processed
+            else (self.raw_data_dir / file_name)
+        )
         df.to_csv(path, index=keep_index)
-        print(f"Saved cleaned data to {path}")
+        print(f"Saved data to {path}")

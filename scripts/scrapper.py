@@ -1,8 +1,10 @@
 from google_play_scraper import reviews as gps_reviews
-from src.constants import REVIEW_KEYS
+from .constants import REVIEW_KEYS, SCRAPPER_CONFIG, MAX_SCRAPPER_RETRIES
+from .decorator import retry
 
 
-def data_scrapper(app_id: str, lang: str = "en", country: str = "et", count: int = 600):
+@retry(max_retries=MAX_SCRAPPER_RETRIES)
+def data_scrapper(app_id: str):
     """
     Fetch reviews for an app_id using google_play_scraper.reviews.
     Returns a list of dicts containing only keys in REVIEW_KEYS.
@@ -10,9 +12,7 @@ def data_scrapper(app_id: str, lang: str = "en", country: str = "et", count: int
     """
 
     try:
-        review_list, _ = gps_reviews(
-            app_id=app_id, lang=lang, country=country, count=count
-        )
+        review_list, _ = gps_reviews(app_id=app_id, **SCRAPPER_CONFIG)
         filtered_response = [{k: x.get(k) for k in REVIEW_KEYS} for x in review_list]
         return filtered_response
     except Exception as e:
