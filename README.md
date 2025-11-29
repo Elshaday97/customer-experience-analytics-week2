@@ -31,21 +31,33 @@ The goal is to derive **customer experience insights**, identify **pain points**
 ```txt
 .
 ├── data/
-│   ├── reviews_data.csv           # Scraped and cleaned reviews, ignored by git
+│   ├── reviews_data.csv
 │
 ├── notebooks/
-│   ├── collect_data.ipynb        # Notebook for scraping and initial exploration
+│   ├── exploratory_scraping.ipynb
+│   ├── sentiment_analysis.ipynb
 │
 ├── scripts/
-│   ├── scrapper.py               # Google Play scraping logic
-│   ├── parser.py                 # Parser for normalizing & flattening review data
+│   ├── __init__.py
+│   ├── constants.py
+│   ├── decorator.py
+│   ├── parser.py
+│   ├── scrapper.py
+│   ├── text_cleaner.py
+│   ├── README.md
 │
 ├── src/
-│   ├── constants.py              # All constant values (app IDs, keys)
+│   ├── analysis/
+│   │   └── __init__.py
+│   │   └── sentiment.py
 │   ├── data/
-│   │   └── manager.py            # DataManager class for scraping/loading/saving
+│   │   └── __init__.py
+│   │   └── manager.py
 │   ├── preprocessing/
-│       └── cleaner.py            # Text cleaning methods
+│   │   └── __init__.py
+│       └── cleaner.py
+│   ├── README.md
+├── tests/
 │
 └── README.md
 ```
