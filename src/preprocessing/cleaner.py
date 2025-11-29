@@ -1,6 +1,6 @@
 import pandas as pd
-from tabulate import tabulate
-from ..constants import ethiopic_pattern, KEY_MAPPING
+from scripts.constants import ethiopic_pattern
+from scripts import clean_text
 
 
 class DataCleaner:
@@ -8,16 +8,16 @@ class DataCleaner:
         self.df = df
         self.date_column_key = "date"
         self.review_col_key = "review"
+        self.clean_review_col_key = "clean_review"
 
-    def remove_missing_values(self):
+    def remove_missing_values_and_duplicates(self):
         if self.df.empty:
             raise ValueError("DataFrame is empty — cannot clean.")
 
         before = len(self.df)
-        self.df = self.df.dropna()
+        self.df = self.df.drop_duplicates().dropna()
         after = len(self.df)
-
-        print(f"Removed {before - after} rows with missing values.")
+        print(f"Removed {before - after} rows with missing and duplicate values.")
         return True
 
     def normalize_dates(self):
@@ -45,13 +45,19 @@ class DataCleaner:
         after = len(self.df)
 
         print(f"Removed {before - after} rows with Ethiopic reviews.")
+
+        self.df[self.clean_review_col_key] = self.df[self.review_col_key].map(
+            clean_text
+        )
+        print(f"Saved cleaned review under {self.clean_review_col_key}")
+
         return True
 
     def get_df(self):
         return self.df
 
     def clean_df(self):
-        self.remove_missing_values()
+        self.remove_missing_values_and_duplicates()
         self.clean_reviews()
         self.normalize_dates()
         return True

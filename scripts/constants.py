@@ -27,3 +27,17 @@ GOOGLE_PLAY = "google_play"
 
 # Regex for any Ethiopic script character (Amharic)
 ethiopic_pattern = re.compile(r"[\u1200-\u137F]")
+
+# Scrapper Confif
+SCRAPPER_CONFIG = {
+    "count": 600,
+    "country": "et",
+    "lang": "en",
+}
+
+MAX_SCRAPPER_RETRIES = 3
+
+NEGATION_WORDS = {"not", "no", "never", "n't", "dont", "don't"}
+
+RAW_DATA_DIR_FOR_NOTEBOOKS = "../data/raw"
+PROCESSED_DATA_DIR_FOR_NOTEBOOKS = "../data/processed"
