@@ -7,8 +7,8 @@ from scripts.constants import (
     BOA,
     CBE,
     DASHEN,
-    RAW_DATA_DIR_FOR_NOTEBOOKS,
-    PROCESSED_DATA_DIR_FOR_NOTEBOOKS,
+    RAW_DATA_DIRS,
+    PROCESSED_DATA_DIR,
 )
 from scripts import data_scrapper, reviews_parser
 from src.preprocessing import DataCleaner
@@ -18,8 +18,8 @@ class DataManager:
 
     def __init__(self):
         self.bank_app_ids = {DASHEN: DASHEN_APP_ID, CBE: CBE_APP_ID, BOA: BOA_APP_ID}
-        self.raw_data_dir = Path(RAW_DATA_DIR_FOR_NOTEBOOKS)
-        self.processed_data_dir = Path(PROCESSED_DATA_DIR_FOR_NOTEBOOKS)
+        self.raw_data_dir = Path(RAW_DATA_DIRS)
+        self.processed_data_dir = Path(PROCESSED_DATA_DIR)
         self.reviews_data_file_name = "reviews_data.csv"
         self.cleaned_reviews_data_file_name = "cleaned_reviews_data.csv"
 
