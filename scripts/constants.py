@@ -101,8 +101,8 @@ CUSTOM_PROJECT_STOPWORDS = {
     "know" "go",
 }
 
-RAW_DATA_DIR_FOR_NOTEBOOKS = "../data/raw"
-PROCESSED_DATA_DIR_FOR_NOTEBOOKS = "../data/processed"
+RAW_DATA_DIRS = "../data/raw"
+PROCESSED_DATA_DIR = "../data/processed"
 
 CUSOM_USERNAME_STOPWORDS = [
     "aadan",
