@@ -68,7 +68,58 @@ CONTRACTIONS = {
 }
 
 
-CUSTOM_PROJECT_STOPWORDS = {"app", "apps", "update", "updated", "new", "better"}
+CUSTOM_PROJECT_STOPWORDS = {
+    # domain-specific
+    "bank",
+    "banking",
+    "app",
+    "application",
+    "mobile",
+    "ethiopia",
+    "boa",
+    "cbe",
+    "dashen",
+    "super",
+    # general filler
+    "one",
+    "ever",
+    "ha",
+    "ok",
+    "wow",
+    "time",
+    "use",
+    "using",
+    "really",
+    "keep",
+    "even",
+    "open",
+    "make",
+    "like",
+    "thank",
+    "doe",
+    "wa",
+    "know" "go",
+}
 
 RAW_DATA_DIR_FOR_NOTEBOOKS = "../data/raw"
 PROCESSED_DATA_DIR_FOR_NOTEBOOKS = "../data/processed"
+
+CUSOM_USERNAME_STOPWORDS = [
+    "aadan",
+    "abdulkadir",
+    "abebaw",
+    "asfaw",
+    "asefa",
+    "asledin",
+    "axmed",
+    "barkhadle",
+    "abdrug",
+    "bentahuuuu",
+    "abdulakim",
+    "abrahim",
+    "elemoo",
+    "damse",
+    "obsa",
+    "ibsa",
+    "zenebe",
+]
