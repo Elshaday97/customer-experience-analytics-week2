@@ -98,7 +98,10 @@ CUSTOM_PROJECT_STOPWORDS = {
     "thank",
     "doe",
     "wa",
-    "know" "go",
+    "know",
+    "go",
+    "ahead",
+    "step",
 }
 
 RAW_DATA_DIRS = "../data/raw"
@@ -108,6 +111,7 @@ CUSOM_USERNAME_STOPWORDS = [
     "aadan",
     "abdulkadir",
     "abebaw",
+    "abrahim",
     "asfaw",
     "asefa",
     "asledin",
@@ -122,4 +126,102 @@ CUSOM_USERNAME_STOPWORDS = [
     "obsa",
     "ibsa",
     "zenebe",
+    "mohammed",
+    "riyad",
+    "abaoli",
 ]
+
+THEMES = {
+    "Account Access & Login": [
+        "login",
+        "password",
+        "pin",
+        "otp",
+        "access",
+        "developer",
+        "device",
+    ],
+    "Transactions": [
+        "transfer",
+        "send money",
+        "transaction",
+        "payment",
+        "balance",
+        "fail",
+    ],
+    "App Performance & Reliability": [
+        "slow",
+        "crash",
+        "freeze",
+        "error",
+        "loading",
+        "not working",
+        "working",
+        "not work",
+        "bug",
+        "fix",
+        "worst",
+        "take",
+        "long",
+        "functional",
+        "poor",
+        "connection",
+        "usable",
+        "unusable",
+        "fail",
+        "failure",
+        "network",
+        "load",
+    ],
+    "User Interface & Experience": [
+        "easy",
+        "friendly",
+        "simple",
+        "design",
+        "interface",
+        "navigation",
+        "excellent",
+        "worst",
+        "good",
+        "amazing",
+        "exprience",
+        "wow",
+    ],
+    "Customer Support & Feature Requests": [
+        "support",
+        "help",
+        "service",
+        "feature",
+        "request",
+        "customer",
+    ],
+}
+
+RECOMMENDATIONS = {
+    "App Performance & Reliability": [
+        "Conduct a full performance audit: reduce app startup time, fix memory leaks, "
+        "and optimize slow API calls.",
+        "Implement crash reporting (e.g., Firebase Crashlytics) and prioritize top crash fixes.",
+        "Introduce lazy loading and image compression to reduce load times on low-end devices.",
+    ],
+    "Account Access & Login": [
+        "Simplify OTP flow: allow biometric fallback, resend OTP faster, and show clearer error messages.",
+        "Add 'Remember this device' + trusted device management to reduce login friction.",
+        "Support alternative login methods (e.g., email magic link, face ID).",
+    ],
+    "Transactions": [
+        "Improve transaction failure handling: show exact error reason + one-tap retry button.",
+        "Add transaction status tracker and push notifications for pending/delayed transfers.",
+        "Increase daily transfer limits or make them user-configurable with risk-based approval.",
+    ],
+    "Customer Support & Feature Requests": [
+        "Launch in-app chat support with 24/7 availability and conversation history.",
+        "Create a public feature request portal (e.g., Canny or in-app voting) to capture user needs.",
+        "Shorten support response time SLA to under 2 hours for critical issues.",
+    ],
+    "User Interface & Experience": [
+        "Run usability testing sessions with real users and fix top 3 friction points.",
+        "Redesign key flows (e.g., transfer, balance check) based on heatmaps and session recordings.",
+        "Adopt consistent design system and improve dark mode support.",
+    ],
+}

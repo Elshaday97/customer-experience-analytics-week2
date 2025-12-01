@@ -60,7 +60,8 @@ class DatabaseManager:
                 vader_sentiment_score FLOAT,
                 textblob_sentiment_label TEXT,
                 textblob_sentiment_score FLOAT,
-                source TEXT
+                source TEXT,
+                theme TEXT
             );
             """,
             "CREATE INDEX IF NOT EXISTS idx_reviews_bank_id ON reviews(bank_id);",
@@ -105,9 +106,9 @@ class DatabaseManager:
                 review_id, bank_id, review_text, rating, review_date,
                 vader_sentiment_label, vader_sentiment_score,
                 textblob_sentiment_label, textblob_sentiment_score,
-                source
+                source, theme
             )
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON CONFLICT (review_id) DO NOTHING;
         """
         for _, row in df.iterrows():
@@ -128,6 +129,7 @@ class DatabaseManager:
                 row["textblob_label"],
                 row["textblob_score"],
                 row["source"],
+                row["theme"],
             )
             self.execute(sql, params)
         print("Inserted reviews successfully!")
