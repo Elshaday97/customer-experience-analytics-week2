@@ -14,5 +14,5 @@ def create_db():
         )
         print("Connected to PostgreSQL successfully!")
         return conn
-    except psycopg2.Error as e:
+    except Exception as e:
         raise ConnectionError(f"Error connecting to PostgreSQL: {e}")
